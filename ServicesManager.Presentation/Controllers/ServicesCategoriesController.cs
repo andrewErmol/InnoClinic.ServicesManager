@@ -6,7 +6,7 @@ using ServicesManager.Services.Abstractions.IServices;
 
 namespace ServicesCategoriesManager.Presentation.Controllers
 {
-    [Route("api/service-categories")]
+    [Route("api/categories")]
     [ApiController]
     public class ServicesCategoriesController : ControllerBase
     {

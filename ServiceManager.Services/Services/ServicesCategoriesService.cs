@@ -54,6 +54,7 @@ namespace ServicesManager.Services.Services
         public async Task UpdateServiceCategory(Guid id, ServiceCategory serviceCategory)
         {
             var serviceCategoryEntity = await _repositoryManager.ServicesCategoriesRepository.GetServiceCategory(id, trackChanges: true);
+            serviceCategory.Id = id;
 
             if (serviceCategoryEntity == null)
             {
