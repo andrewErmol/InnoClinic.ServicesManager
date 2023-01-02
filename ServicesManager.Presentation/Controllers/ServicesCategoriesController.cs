@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModelsToRequest.RequestEntity;
 using ServicesManager.Contracts.Models;
 using ServicesManager.Services.Abstractions.IServices;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace ServicesCategoriesManager.Presentation.Controllers
 {
@@ -20,12 +22,19 @@ namespace ServicesCategoriesManager.Presentation.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(Summary = "Get a list of categories",
+            Description = "This endpoint allows to get a list categories.")]
+        [SwaggerResponse(StatusCodes.Status200OK, "List of categories", typeof(IEnumerable<ServiceCategory>))]
         public async Task<IActionResult> GetServicesCategories()
         {
             return Ok(await _serviceManager.ServicesCategoriesService.GetServicesCategories());
         }
 
         [HttpGet("{id}")]
+        [SwaggerOperation(Summary = "Get a Category",
+            Description = "This endpoint allows to get a category.")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Category", typeof(ServiceCategory))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "Entity with entered id doesn't exist")]
         public async Task<IActionResult> GetServiceCategory(Guid id)
         {
             var serviceCategory = await _serviceManager.ServicesCategoriesService.GetServiceCategoryById(id);
@@ -34,6 +43,10 @@ namespace ServicesCategoriesManager.Presentation.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(Summary = "Create a category",
+            Description = "This endpoint allows to create a category.")]
+        [SwaggerResponse(StatusCodes.Status201Created, "The created Category Id", typeof(Guid))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request")]
         public async Task<IActionResult> CreateServiceCategory([FromBody] ServiceCategoryRequest serviceCategoryForRequest)
         {
             var serviceCategory = _mapper.Map<ServiceCategory>(serviceCategoryForRequest);
@@ -44,6 +57,10 @@ namespace ServicesCategoriesManager.Presentation.Controllers
         }
 
         [HttpPut("{id}")]
+        [SwaggerOperation(Summary = "Update a category",
+            Description = "This endpoint allows to update a category.")]
+        [SwaggerResponse(StatusCodes.Status204NoContent)]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "Entity with entered id doesn't exist")]
         public async Task<IActionResult> UpdateServiceCategory(Guid id, [FromBody] ServiceCategoryRequest serviceCategoryForRequest)
         {
             var serviceCategory = _mapper.Map<ServiceCategory>(serviceCategoryForRequest);
@@ -54,6 +71,10 @@ namespace ServicesCategoriesManager.Presentation.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(Summary = "Delete a category",
+            Description = "This endpoint allows to delete a category.")]
+        [SwaggerResponse(StatusCodes.Status204NoContent)]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "Entity with entered id doesn't exist")]
         public async Task<IActionResult> DeleteServiceCategory(Guid id)
         {
             await _serviceManager.ServicesCategoriesService.DeleteServiceCategory(id);

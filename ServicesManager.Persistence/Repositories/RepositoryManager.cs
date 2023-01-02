@@ -13,6 +13,9 @@ namespace ServicesManager.Persistence.Repositories
             _servicesDbContext = serviceDbContext;
         }
 
+        /// <summary>
+        /// Create object ServiceRepository
+        /// </summary>
         public IServicesRepository ServicesRepository
         {
             get
@@ -23,6 +26,9 @@ namespace ServicesManager.Persistence.Repositories
             }
         }
 
+        /// <summary>
+        /// Create object ServiceCategoryRepository
+        /// </summary>
         public IServicesCategoriesRepository ServicesCategoriesRepository
         {
             get

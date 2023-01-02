@@ -21,7 +21,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{A54152E6-F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{FEC63068-D0FD-4F0E-997E-EAA5881D97F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicesManager.ModelsToRequest", "ModelsToRequest\ServicesManager.ModelsToRequest.csproj", "{9622E2BC-5A1B-4A91-919D-48E361B29A94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServicesManager.ModelsToRequest", "ModelsToRequest\ServicesManager.ModelsToRequest.csproj", "{9622E2BC-5A1B-4A91-919D-48E361B29A94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicesManager.Tests", "ServicesManager.Tests\ServicesManager.Tests.csproj", "{973CAC80-A7AB-45CF-9ED4-4E588E6440F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{9622E2BC-5A1B-4A91-919D-48E361B29A94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9622E2BC-5A1B-4A91-919D-48E361B29A94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9622E2BC-5A1B-4A91-919D-48E361B29A94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{973CAC80-A7AB-45CF-9ED4-4E588E6440F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{973CAC80-A7AB-45CF-9ED4-4E588E6440F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{973CAC80-A7AB-45CF-9ED4-4E588E6440F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{973CAC80-A7AB-45CF-9ED4-4E588E6440F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
