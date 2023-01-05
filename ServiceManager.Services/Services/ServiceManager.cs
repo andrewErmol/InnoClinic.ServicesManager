@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using ServicesManager.Domain.IRepositories;
 using ServicesManager.Services.Abstractions.IServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServicesManager.Services.Services
 {

@@ -1,12 +1,6 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ServicesManager.Domain.Entities;
 using ServicesManager.Domain.IRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServicesManager.Persistence.Repositories
 {
@@ -27,8 +21,8 @@ namespace ServicesManager.Persistence.Repositories
         public async Task<IEnumerable<ServiceEntity>> GetServices(bool trackChanges)
         {
             IQueryable<ServiceEntity> services = !trackChanges
-                ? _dbContext.Services.AsNoTracking()
-                : _dbContext.Services;
+                ? _dbContext.Services.AsNoTracking().Include(s => s.Category)
+                : _dbContext.Services.Include(s => s.Category);
 
             return await services.ToListAsync();
         }
@@ -42,8 +36,8 @@ namespace ServicesManager.Persistence.Repositories
         public async Task<ServiceEntity> GetService(Guid serviceId, bool trackChanges)
         {
             ServiceEntity service = !trackChanges
-                ? await _dbContext.Services.AsNoTracking().FirstOrDefaultAsync(s => s.Id == serviceId)
-                : await _dbContext.Services.FirstOrDefaultAsync(s => s.Id == serviceId);
+                ? await _dbContext.Services.AsNoTracking().Include(s => s.Category).FirstOrDefaultAsync(s => s.Id == serviceId)
+                : await _dbContext.Services.Include(s => s.Category).FirstOrDefaultAsync(s => s.Id == serviceId);
 
             return service;
         }
