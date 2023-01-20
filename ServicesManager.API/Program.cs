@@ -50,8 +50,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware(typeof(ExceptionHandlerMiddleware));
 
-app.UseHttpsRedirection();
-
 app.UseStaticFiles();
 
 app.UseCors("CorsPolicy");
@@ -60,5 +58,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MigrateDatabase();
 
 app.Run();
