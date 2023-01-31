@@ -37,6 +37,7 @@ builder.Services.AddAuthentication();
 builder.Services.ConfigureSwagger();
 
 builder.Services.ConfigureServices();
+builder.Services.ConfigureMassTransit(builder.Configuration);
 
 
 var app = builder.Build();

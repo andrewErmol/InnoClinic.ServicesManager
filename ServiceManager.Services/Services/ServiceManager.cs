@@ -11,11 +11,13 @@ namespace ServicesManager.Services.Services
 
         private IServicesService _servicesService;
         private IServicesCategoriesService _servicesCategoriesService;
+        private IPublishService _publishService;
 
-        public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper)
+        public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper, IPublishService publishService)
         {
             _repositoryManager = repositoryManager;
             _mapper = mapper;
+            _publishService = publishService;
         }
 
         public IServicesService ServicesService
@@ -23,7 +25,7 @@ namespace ServicesManager.Services.Services
             get
             {
                 if (_servicesService == null)
-                    _servicesService = new ServicesService(_repositoryManager, _mapper);
+                    _servicesService = new ServicesService(_repositoryManager, _mapper, _publishService);
                 return _servicesService;
             }
         }

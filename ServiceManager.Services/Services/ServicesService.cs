@@ -11,11 +11,13 @@ namespace ServicesManager.Services.Services
     {
         private readonly IRepositoryManager _repositoryManager;
         private readonly IMapper _mapper;
+        private readonly IPublishService _publishService;
 
-        public ServicesService(IRepositoryManager repositoryManager, IMapper mapper)
+        public ServicesService(IRepositoryManager repositoryManager, IMapper mapper, IPublishService publishService)
         {
             _repositoryManager = repositoryManager;
             _mapper = mapper;
+            _publishService = publishService;
         }
 
         /// <summary>
@@ -81,6 +83,7 @@ namespace ServicesManager.Services.Services
             _mapper.Map(service, serviceEntity);
 
             await _repositoryManager.ServicesRepository.UpdateService(serviceEntity);
+            await _publishService.PublishServiceUpdatedMessage(service);
         }
 
         /// <summary>

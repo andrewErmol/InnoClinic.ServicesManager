@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ServicesManager.Domain.IRepositories;
@@ -34,9 +35,28 @@ namespace ServicesManager.API.Extensions
         {
             services.AddScoped<IRepositoryManager, RepositoryManager>();
             services.AddScoped<IServiceManager, ServiceManager>();
+            services.AddScoped<IPublishService, PublishService>();
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<ServiceForRequestValidator>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        }
+
+        public static void ConfigureMassTransit(this IServiceCollection services, IConfiguration configuration)
+        {
+            var config = configuration.GetSection("Messaging");
+
+            services.AddMassTransit(x =>
+            {
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.Host(config["Host"], "/", h => {
+                        h.Username(config["UserName"]);
+                        h.Password(config["Password"]);
+                    });
+
+                    cfg.ConfigureEndpoints(context);
+                });
+            });
         }
 
         public static void ConfigureSwagger(this IServiceCollection services)
